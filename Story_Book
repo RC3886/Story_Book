@@ -1,0 +1,194 @@
+from threading import Timer
+import time
+import random
+
+
+timeout = 10
+t = Timer(timeout, print, ['Sorry, times up'])
+t.start()
+prompt = "You have %d seconds to choose the correct answer...\n" % timeout
+answer = input(prompt)
+t.cancel()
+if time.time() >= 10:
+    quit()
+
+"""
+start_time = time.time()
+seconds = 10
+
+start_time = time.time()
+seconds = 10
+
+while True:
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+
+    if elapsed_time > seconds:
+        print("The raiders caught up with you. Your hesitation killed you.")
+        quit()
+        break
+"""
+
+sword = 0
+coins = 0
+food = 0  # steak, meat
+water = 0
+pan = 0
+coat = 0
+wine = 0
+axe = 0
+
+gear_score = 0
+
+name = input("Hello adventurer, what is your name? ").capitalize()
+print("Alright " + name + ", you don't have much time. Your village is under attack of an enemy army.")
+
+sword_start = input("You just watched your neighbours to be slaughtered. You can pick only few things and run away. "
+                    "Will you pick your sword? (Y/N) ").upper()
+if sword_start == "Y":
+    print("You grabbed your sword and put it on your back")
+    gear_score += 2
+    sword += 1
+else:
+    print("You realized that your sword would only hinder you while running for your life.")
+
+coins_start = input("There is a poach of coins on the table. Will You grab it? (Y/N) ").upper()
+if coins_start == "Y":
+    print("Coins are always useful.")
+    gear_score += 1
+    coins += 1
+else:
+    print("Who needs money, when life is at stake, right?")
+
+food_start = input("Will you grab a freshly cooked steak? (Y/N) ").upper()
+if food_start == "Y":
+    print("No way you leave such awesome piece of meat to the raiders!")
+    gear_score += 1
+    food += 1
+else:
+    print("Obviously not now...")
+
+water_start = input("There is a half-empty travel water bottle in the corner. Will you take it? (Y//N) ").upper()
+if water_start == "Y":
+    print("This might come in handy")
+    gear_score += 1
+    water += 1
+else:
+    print("Water is everywhere. Just go already!")
+
+pan_start = input(
+    "There is a frying pan hanging on the wall. Might be useful even in the wilderness. Take it? (Y/N) ").upper()
+if pan_start == "Y":
+    print("Of course you dont leave your favourite pan here!")
+    gear_score += 2
+    pan += 1
+else:
+    print("You leave the pan on it's place.")
+
+coat_start = input(
+    "The coat next to the pan will keep you warm during nights. It's an obvious choice, right? (Y/N) ").upper()
+if coat_start == "Y":
+    print("You already feel warm wearing it.")
+    gear_score += 2
+    coat += 1
+else:
+    print("You are right. It's not ideal for running anyway.")
+
+wine_start = input("Heading to doors, you stumbled upon a jug of homemade wine. Will you leave it or take it with "
+                   "you? (Y/N) ").upper()
+if wine_start == "Y":
+    print("There is nobody to judge you...")
+    gear_score += 3
+    wine += 1
+else:
+    print("You ignore the jug and run out of your house.")
+
+axe_start = input("Just before leaving your garden, you see a woodcutter axe. In case you would have to fight, "
+                  "this piece would "
+                  "do a lot of damage. Will you grab it? (Y/N)").upper()
+if axe_start == "Y":
+    print("It's not a perfect weapon, but you definitely look dangerous with it in your hands.")
+    gear_score += 3
+    axe += 1
+else:
+    print("Right, who would pick up an axe for a run.")
+print("")
+
+if gear_score >= 8:
+    print("Your items are slowing you down way too much.The riders are faster. The last thing you feel is a spear "
+          "penetrating your chest. You died.")
+    quit()
+else:
+    print("As you are running away, the sound of horses is getting weaker.")
+
+
+escape = input("You managed to escape the burning village, but you hear horses coming towards you. "
+               "You should move out of sight fast. Will you run to the nearest forest or along the river in hope the "
+               "bushes will cover you? (forest/river/wait) ")
+
+timeout = 15
+t = Timer(timeout, print, ["Your hesitation killed you."])
+t.start()
+escape = "You managed to escape the burning village, but you hear horses coming towards you. You should move out of sight fast. Will you run to the nearest forest or along the river in hope the bushes will cover you? (forest/river/wait) \n"
+answer = input(escape)
+t.cancel()
+
+start_time = time.time()
+seconds = 15
+""""
+while True:
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+
+    if elapsed_time > seconds:
+        print("Finished iterating in: " + str(int(elapsed_time))  + " seconds")
+        break
+"""
+if escape == "forest":
+    print("You have made it to the forest. It doesn't feel safe here...")
+elif escape == "river":
+    print("You have made it to the river and bushes cover you well enough.")
+else:
+    print("The raiders spotted you from the distance and your decision not to hide killed you.")
+    quit()
+
+bear = input("You encounter a bear. Will you fight it or run back? (fight/run)").lower
+if bear == "fight":
+    if sword == 0 and axe == 0:
+        print("You tried to fist fight the bear and died.")
+        quit()
+    else:
+        random.randint(1, 10)
+        if random.randint >= 7:
+            print("You died.")
+            quit()
+        else:
+            print("You defeated the bear and took some meat from him.")
+            food += 1
+
+else:
+    print("You returned back to the village and got yourself killed.")
+    quit()
+
+bridge = input("You reached an old, rotten bridge. Will you cross it to shorten your journey or carry on the longer "
+               "path through dried planes? (cross/continue) ")
+if bridge == "cross":
+    if gear_score >= 6:
+        print("You are too heavy. You fell into a chasm and died.")
+    else:
+        print("You can't believe you've made through all the rotten wood.")
+        print("You see a camp in front of you.")
+else:
+    if food == 1 and water == 1:
+        print("You see a camp in the distance. ")
+    else:
+        print("You realized you probably do not have enough food and water for this journey, but you decide to give "
+              "it a try.")
+        random_number = input("Chose a number between 1 and 5 to determine your chance to survive.")
+        roll = random.randint(1, 5)
+        if random_number == roll:
+            print("You have made it around the chasm. Starved and thirsty you approach a camp.")
+        else:
+            print("You are tired, crawl forward and falling asleep. A bandit found you, slit your throat and took all "
+                  "your possession. You died. ")
+            quit()
